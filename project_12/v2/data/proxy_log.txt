@@ -1,0 +1,4 @@
+{"timestamp": "15:18:49", "type": "!", "message": "Monitoring started on port 9998"}
+{"timestamp": "15:18:49", "type": "!", "message": "Monitoring stopped"}
+{"timestamp": "15:18:52", "type": "!", "message": "Monitoring stopped"}
+{"timestamp": "15:26:23", "type": "!", "message": "Monitoring stopped"}

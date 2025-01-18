@@ -1,0 +1,40 @@
+{
+  "theme": "breeze",
+  "colors": {
+    "bg": "#f0f0f0",
+    "primary": "#2196F3",
+    "secondary": "#64B5F6",
+    "success": "#4CAF50",
+    "error": "#F44336",
+    "warning": "#FFC107",
+    "text": "#212121",
+    "light_text": "#757575",
+    "own_msg": "#E3F2FD",
+    "other_msg": "#FFFFFF",
+    "system_msg": "#F5F5F5"
+  },
+  "fonts": {
+    "header": [
+      "Helvetica",
+      20,
+      "bold"
+    ],
+    "subheader": [
+      "Helvetica",
+      14
+    ],
+    "normal": [
+      "Helvetica",
+      11
+    ],
+    "message": [
+      "Helvetica",
+      11
+    ],
+    "input": [
+      "Helvetica",
+      12
+    ]
+  },
+  "show_timestamps": true
+}
