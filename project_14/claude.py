@@ -1710,7 +1710,7 @@ class NmapScannerApp:
 Version: 1.0
 Author: MAS
 License: MIT
-Website: https://github.com/yourusername/nmap-scanner-gui
+Website: https://github.com/MOAHSA/ChatGPT-Projects/tree/main/project_14
 
 Description:
 This application provides a comprehensive graphical interface for the Nmap Security Scanner,
@@ -1748,7 +1748,7 @@ Credits:
 • Special thanks to the Nmap development team
 
 For bug reports and feature requests, please visit:
-https://github.com/yourusername/nmap-scanner-gui/issues"""
+https://github.com/MOAHSA/ChatGPT-Projects/tree/main/project_14"""
 
         # Create a custom dialog for better presentation
         info_dialog = tk.Toplevel(self.root)
