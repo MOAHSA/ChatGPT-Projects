@@ -1,0 +1,259 @@
+{
+    "Soups": {
+        "Traditional Roast": {
+            "description": "A traditional family recipe passed down through generations. Rich in flavor and tradition.",
+            "ingredients": [
+                "2 pounds meat, cubed",
+                "3 carrots, peeled and chopped",
+                "2 potatoes, diced",
+                "1 onion, finely diced",
+                "2 stalks celery, chopped",
+                "4 cups broth",
+                "2 bay leaves",
+                "Salt and pepper"
+            ],
+            "instructions": [
+                "Season meat with salt and pepper.",
+                "Brown meat in a large pot over medium-high heat.",
+                "Add vegetables and cook for 5 minutes.",
+                "Pour in broth and add bay leaves.",
+                "Bring to a boil, then reduce heat and simmer for 1.5 hours.",
+                "Check seasoning and adjust if needed.",
+                "Serve hot with crusty bread."
+            ]
+        },
+        "Homemade Casserole": {
+            "description": "A delicious homemade recipe that's perfect for any occasion. This dish combines fresh ingredients with amazing flavors.",
+            "ingredients": [
+                "2 tablespoons olive oil",
+                "1 onion, diced",
+                "2 cloves garlic, minced",
+                "1 bell pepper, sliced",
+                "2 cups vegetables, chopped",
+                "1 can tomatoes",
+                "Salt and pepper to taste",
+                "Fresh herbs for garnish"
+            ],
+            "instructions": [
+                "Prepare all ingredients by washing and chopping as needed.",
+                "Heat oil in a large pan over medium heat.",
+                "Add onions and garlic, saut\u00e9 until fragrant.",
+                "Add remaining vegetables and cook for 5-7 minutes.",
+                "Pour in tomatoes and simmer for 15 minutes.",
+                "Season with salt, pepper, and herbs.",
+                "Serve hot and enjoy!"
+            ]
+        },
+        "Quick Dinner": {
+            "description": "A quick and easy recipe that takes minimal time to prepare. Perfect for busy weeknights!",
+            "ingredients": [
+                "1 package pre-made dough",
+                "1/2 cup sauce",
+                "1 cup cheese, shredded",
+                "Your favorite toppings",
+                "1 tablespoon herbs"
+            ],
+            "instructions": [
+                "Preheat oven to 400\u00b0F (200\u00b0C).",
+                "Roll out the dough on a floured surface.",
+                "Spread sauce evenly over the dough.",
+                "Sprinkle cheese and add toppings.",
+                "Bake for 10-15 minutes until golden.",
+                "Allow to cool slightly before serving."
+            ]
+        }
+    },
+    "Lunch": {
+        "Quick Appetizer": {
+            "description": "A quick and easy recipe that takes minimal time to prepare. Perfect for busy weeknights!",
+            "ingredients": [
+                "1 package pre-made dough",
+                "1/2 cup sauce",
+                "1 cup cheese, shredded",
+                "Your favorite toppings",
+                "1 tablespoon herbs"
+            ],
+            "instructions": [
+                "Preheat oven to 400\u00b0F (200\u00b0C).",
+                "Roll out the dough on a floured surface.",
+                "Spread sauce evenly over the dough.",
+                "Sprinkle cheese and add toppings.",
+                "Bake for 10-15 minutes until golden.",
+                "Allow to cool slightly before serving."
+            ]
+        },
+        "Homemade Casserole": {
+            "description": "A delicious homemade recipe that's perfect for any occasion. This dish combines fresh ingredients with amazing flavors.",
+            "ingredients": [
+                "2 tablespoons olive oil",
+                "1 onion, diced",
+                "2 cloves garlic, minced",
+                "1 bell pepper, sliced",
+                "2 cups vegetables, chopped",
+                "1 can tomatoes",
+                "Salt and pepper to taste",
+                "Fresh herbs for garnish"
+            ],
+            "instructions": [
+                "Prepare all ingredients by washing and chopping as needed.",
+                "Heat oil in a large pan over medium heat.",
+                "Add onions and garlic, saut\u00e9 until fragrant.",
+                "Add remaining vegetables and cook for 5-7 minutes.",
+                "Pour in tomatoes and simmer for 15 minutes.",
+                "Season with salt, pepper, and herbs.",
+                "Serve hot and enjoy!"
+            ]
+        },
+        "Traditional Bread": {
+            "description": "A traditional family recipe passed down through generations. Rich in flavor and tradition.",
+            "ingredients": [
+                "2 pounds meat, cubed",
+                "3 carrots, peeled and chopped",
+                "2 potatoes, diced",
+                "1 onion, finely diced",
+                "2 stalks celery, chopped",
+                "4 cups broth",
+                "2 bay leaves",
+                "Salt and pepper"
+            ],
+            "instructions": [
+                "Season meat with salt and pepper.",
+                "Brown meat in a large pot over medium-high heat.",
+                "Add vegetables and cook for 5 minutes.",
+                "Pour in broth and add bay leaves.",
+                "Bring to a boil, then reduce heat and simmer for 1.5 hours.",
+                "Check seasoning and adjust if needed.",
+                "Serve hot with crusty bread."
+            ]
+        }
+    },
+    "test": {
+        "testr": {
+            "description": "sfddfd",
+            "ingredients": [
+                "fdsf",
+                "sf",
+                "sdfs",
+                "df",
+                "sd",
+                "fs",
+                "f",
+                "sf"
+            ],
+            "instructions": [
+                "sdfdsfsdfs",
+                "s",
+                "fds",
+                "fs",
+                "fsd",
+                "fs",
+                "f",
+                "s"
+            ]
+        }
+    },
+    "ssssss": {
+        "Quick Dinner": {
+            "description": "A quick and easy recipe that takes minimal time to prepare. Perfect for busy weeknights!",
+            "ingredients": [
+                "1 package pre-made dough",
+                "1/2 cup sauce",
+                "1 cup cheese, shredded",
+                "Your favorite toppings",
+                "1 tablespoon herbs"
+            ],
+            "instructions": [
+                "Preheat oven to 400\u00b0F (200\u00b0C).",
+                "Roll out the dough on a floured surface.",
+                "Spread sauce evenly over the dough.",
+                "Sprinkle cheese and add toppings.",
+                "Bake for 10-15 minutes until golden.",
+                "Allow to cool slightly before serving."
+            ]
+        },
+        "Homemade Tacos": {
+            "description": "A delicious homemade recipe that's perfect for any occasion. This dish combines fresh ingredients with amazing flavors.",
+            "ingredients": [
+                "2 tablespoons olive oil",
+                "1 onion, diced",
+                "2 cloves garlic, minced",
+                "1 bell pepper, sliced",
+                "2 cups vegetables, chopped",
+                "1 can tomatoes",
+                "Salt and pepper to taste",
+                "Fresh herbs for garnish"
+            ],
+            "instructions": [
+                "Prepare all ingredients by washing and chopping as needed.",
+                "Heat oil in a large pan over medium heat.",
+                "Add onions and garlic, saut\u00e9 until fragrant.",
+                "Add remaining vegetables and cook for 5-7 minutes.",
+                "Pour in tomatoes and simmer for 15 minutes.",
+                "Season with salt, pepper, and herbs.",
+                "Serve hot and enjoy!"
+            ]
+        },
+        "Homemade Soup": {
+            "description": "A delicious homemade recipe that's perfect for any occasion. This dish combines fresh ingredients with amazing flavors.",
+            "ingredients": [
+                "2 tablespoons olive oil",
+                "1 onion, diced",
+                "2 cloves garlic, minced",
+                "1 bell pepper, sliced",
+                "2 cups vegetables, chopped",
+                "1 can tomatoes",
+                "Salt and pepper to taste",
+                "Fresh herbs for garnish"
+            ],
+            "instructions": [
+                "Prepare all ingredients by washing and chopping as needed.",
+                "Heat oil in a large pan over medium heat.",
+                "Add onions and garlic, saut\u00e9 until fragrant.",
+                "Add remaining vegetables and cook for 5-7 minutes.",
+                "Pour in tomatoes and simmer for 15 minutes.",
+                "Season with salt, pepper, and herbs.",
+                "Serve hot and enjoy!"
+            ]
+        },
+        "Quick Dessert": {
+            "description": "A quick and easy recipe that takes minimal time to prepare. Perfect for busy weeknights!",
+            "ingredients": [
+                "1 package pre-made dough",
+                "1/2 cup sauce",
+                "1 cup cheese, shredded",
+                "Your favorite toppings",
+                "1 tablespoon herbs"
+            ],
+            "instructions": [
+                "Preheat oven to 400\u00b0F (200\u00b0C).",
+                "Roll out the dough on a floured surface.",
+                "Spread sauce evenly over the dough.",
+                "Sprinkle cheese and add toppings.",
+                "Bake for 10-15 minutes until golden.",
+                "Allow to cool slightly before serving."
+            ]
+        },
+        "Homemade Stew": {
+            "description": "A delicious homemade recipe that's perfect for any occasion. This dish combines fresh ingredients with amazing flavors.",
+            "ingredients": [
+                "2 tablespoons olive oil",
+                "1 onion, diced",
+                "2 cloves garlic, minced",
+                "1 bell pepper, sliced",
+                "2 cups vegetables, chopped",
+                "1 can tomatoes",
+                "Salt and pepper to taste",
+                "Fresh herbs for garnish"
+            ],
+            "instructions": [
+                "Prepare all ingredients by washing and chopping as needed.",
+                "Heat oil in a large pan over medium heat.",
+                "Add onions and garlic, saut\u00e9 until fragrant.",
+                "Add remaining vegetables and cook for 5-7 minutes.",
+                "Pour in tomatoes and simmer for 15 minutes.",
+                "Season with salt, pepper, and herbs.",
+                "Serve hot and enjoy!"
+            ]
+        }
+    }
+}
