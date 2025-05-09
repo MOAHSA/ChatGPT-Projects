@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد وتعزيز النصوص الذكية</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add navigation styles */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-button:hover {
+            background: #45a049;
+            transform: translateY(-1px);
+        }
+
+        .nav-button.active {
+            background: #45a049;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <button class="nav-button" onclick="window.location.href='../prompt-builder/index.html'">
+            <span>باني النصوص</span>
+        </button>
+        <button class="nav-button active" onclick="window.location.href='../prompt-builder/index.html'">
+            <span>الواجهة الرئيسية</span>
+        </button>
+    </div>
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <button id="languageToggle">English</button>
+            <button id="themeToggle">🌙</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <div class="prompts-section">
+                    <h2 class="section-title" data-ar="النصوص المتاحة" data-en="Available Prompts">النصوص المتاحة</h2>
+                    <div class="prompts-container" id="promptsContainer">
+                        <!-- Prompts will be loaded here dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <h2 class="section-title" data-ar="معاينة النص" data-en="Prompt Preview">معاينة النص</h2>
+                    <div class="preview-container">
+                        <textarea id="previewText" readonly></textarea>
+                    </div>
+                </div>
+
+                <!-- Main Message Section -->
+                <div class="message-section">
+                    <h2 class="section-title" data-ar="الرسالة الرئيسية" data-en="Main Message">الرسالة الرئيسية</h2>
+                    <div class="toolbar">
+                        <button class="tool-btn" data-action="selectAll" data-ar="تحديد الكل" data-en="Select All">تحديد الكل</button>
+                        <button class="tool-btn" data-action="copy" data-ar="نسخ" data-en="Copy">نسخ</button>
+                        <button class="tool-btn" data-action="cut" data-ar="قص" data-en="Cut">قص</button>
+                        <button class="tool-btn" data-action="paste" data-ar="لصق" data-en="Paste">لصق</button>
+                        <button class="tool-btn" data-action="clear" data-ar="مسح" data-en="Clear">مسح</button>
+                    </div>
+                    <div class="message-container">
+                        <div class="line-numbers" id="lineNumbers"></div>
+                        <textarea id="mainMessage"></textarea>
+                    </div>
+                    <div class="status-bar">
+                        <span id="charCount" data-ar="0 حرف" data-en="0 characters">0 حرف</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="generateBtn" data-ar="إنشاء النص النهائي" data-en="Generate Final Prompt">إنشاء النص النهائي</button>
+                        <button id="copyBtn" data-ar="نسخ إلى الحافظة" data-en="Copy to Clipboard">نسخ إلى الحافظة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 data-ar="الإعدادات" data-en="Settings">الإعدادات</h2>
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="font">الخط</button>
+                    <button class="tab-btn" data-tab="colors">الألوان</button>
+                    <button class="tab-btn" data-tab="theme">المظهر</button>
+                </div>
+                <div class="tab-content">
+                    <!-- Font Settings -->
+                    <div id="fontTab" class="tab-pane active">
+                        <div class="setting-group">
+                            <label data-ar="نوع الخط" data-en="Font Family">نوع الخط</label>
+                            <select id="fontFamily"></select>
+                        </div>
+                        <div class="setting-group">
+                            <label data-ar="حجم الخط" data-en="Font Size">حجم الخط</label>
+                            <select id="fontSize"></select>
+                        </div>
+                        <div class="setting-group">
+                            <label data-ar="نمط الخط" data-en="Font Style">نمط الخط</label>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="boldCheck"> 
+                                    <span data-ar="غامق" data-en="Bold">غامق</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="italicCheck">
+                                    <span data-ar="مائل" data-en="Italic">مائل</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Colors Settings -->
+                    <div id="colorsTab" class="tab-pane">
+                        <div class="setting-group">
+                            <label data-ar="لون النص" data-en="Text Color">لون النص</label>
+                            <input type="color" id="textColor">
+                        </div>
+                        <div class="setting-group">
+                            <label data-ar="لون الخلفية" data-en="Background Color">لون الخلفية</label>
+                            <input type="color" id="bgColor">
+                        </div>
+                    </div>
+                    <!-- Theme Settings -->
+                    <div id="themeTab" class="tab-pane">
+                        <div class="setting-group">
+                            <label>
+                                <input type="checkbox" id="darkModeCheck">
+                                <span data-ar="تفعيل الوضع المظلم" data-en="Enable Dark Mode">تفعيل الوضع المظلم</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-section">
+                    <h3 data-ar="معاينة" data-en="Preview">معاينة</h3>
+                    <div id="settingsPreview" class="preview-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 data-ar="المساعدة" data-en="Help">المساعدة</h2>
+                <div id="helpContent" class="help-content"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

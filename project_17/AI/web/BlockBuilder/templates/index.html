@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Builder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #fff;
+            --text-color: #212529;
+            --block-bg: #e9ecef;
+            --block-hover: #dee2e6;
+            --border-color: #ccc;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #212529;
+            --card-bg: #343a40;
+            --text-color: #f8f9fa;
+            --block-bg: #495057;
+            --block-hover: #6c757d;
+            --border-color: #495057;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        .card-header {
+            background-color: var(--block-bg);
+            border-bottom-color: var(--border-color);
+        }
+
+        .block-list {
+            min-height: 200px;
+            border: 2px dashed var(--border-color);
+            padding: 10px;
+            margin: 10px 0;
+            background-color: var(--card-bg);
+        }
+
+        .block-item {
+            background-color: var(--block-bg);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: move;
+            color: var(--text-color);
+        }
+
+        .block-item:hover {
+            background-color: var(--block-hover);
+        }
+
+        .block-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .block-parameters {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: var(--card-bg);
+            border-radius: 5px;
+            display: none;
+            overflow: visible;
+        }
+        .block-parameters.show {
+            display: block;
+        }
+        .parameter-row {
+            display: grid;
+            grid-template-columns: minmax(150px, 1fr) minmax(200px, 2fr) auto;
+            gap: 10px;
+            margin-bottom: 5px;
+            align-items: start;
+        }
+        .parameter-name {
+            min-width: 150px;
+            overflow: visible;
+            white-space: normal;
+            word-break: break-word;
+        }
+        .parameter-type {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+        }
+        .parameter-value-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 200px;
+        }
+        .parameter-value-direct input,
+        .parameter-value-block select {
+            width: 100%;
+        }
+        .search-box {
+            margin-bottom: 15px;
+        }
+        .block-preview {
+            font-size: 0.9em;
+            color: var(--text-color);
+            margin-top: 5px;
+            max-height: 100px;
+            overflow: hidden;
+        }
+        #result {
+            white-space: pre-wrap;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .btn-copy {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .result-container {
+            position: relative;
+        }
+        .block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .block-actions {
+            display: flex;
+            gap: 5px;
+        }
+        .category-section {
+            margin-bottom: 20px;
+        }
+        .category-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            padding: 5px 10px;
+            background-color: var(--block-bg);
+            border-radius: 5px;
+        }
+        .focus-message {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Prompt Builder</h1>
+            <button class="btn btn-outline-primary" onclick="toggleTheme()">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">البلوكات المتاحة</h5>
+                        <div class="search-box mt-2">
+                            <input type="text" class="form-control" id="blockSearch" placeholder="بحث عن بلوك...">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="available-blocks">
+                            {% for category, category_blocks in blocks.items() %}
+                            <div class="category-section">
+                                <div class="category-title">{{ category }}</div>
+                                {% for block in category_blocks %}
+                                <div class="block-item" draggable="true" data-block="{{ block }}" data-category="{{ category }}">
+                                    <div class="block-header">
+                                        <div>
+                                            <div class="block-name">{{ block }}</div>
+                                            <div class="block-preview">معاينة المحتوى...</div>
+                                        </div>
+                                        <i class="bi bi-grip-vertical"></i>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="focus-message">
+                    <label for="focusMessage" class="form-label">الرسالة الأساسية</label>
+                    <textarea class="form-control" id="focusMessage" rows="3" placeholder="أدخل الرسالة الأساسية التي تريد التركيز عليها..."></textarea>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">ترتيب البلوكات</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="block-order" class="block-list"></div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="buildPrompt()">بناء البرومبت</button>
+                    <button class="btn btn-outline-secondary" onclick="previewPrompt()">معاينة البرومبت</button>
+                </div>
+                
+                <div class="result-container mt-4">
+                    <button class="btn btn-sm btn-outline-primary btn-copy" onclick="copyToClipboard()">
+                        <i class="bi bi-clipboard"></i> نسخ
+                    </button>
+                    <div id="result" class="d-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        const blockOrder = document.getElementById('block-order');
+        const availableBlocks = document.getElementById('available-blocks');
+        
+        // Initialize drag and drop
+        document.querySelectorAll('.block-item').forEach(item => {
+            item.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text/plain', JSON.stringify({
+                    name: e.target.dataset.block,
+                    category: e.target.dataset.category
+                }));
+            });
+        });
+        
+        blockOrder.addEventListener('dragover', e => {
+            e.preventDefault();
+        });
+        
+        blockOrder.addEventListener('drop', e => {
+            e.preventDefault();
+            const blockData = JSON.parse(e.dataTransfer.getData('text/plain'));
+            const block = document.createElement('div');
+            block.className = 'block-item';
+            block.innerHTML = `
+                <div class="block-content">
+                    <div class="block-header">
+                        <div>
+                            <div class="block-name">${blockData.name}</div>
+                            <div class="block-preview">معاينة المحتوى...</div>
+                        </div>
+                        <div class="block-actions">
+                            <button class="btn btn-sm btn-outline-success" onclick="fetchVariables(this)" title="جلب المتغيرات تلقائياً">
+                                <i class="bi bi-magic"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="toggleParameters(this)">
+                                <i class="bi bi-gear"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="removeBlock(this)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-parameters">
+                        <div class="parameters-list"></div>
+                        <button class="btn btn-sm btn-secondary mt-2" onclick="addParameter(this)">إضافة متغير</button>
+                    </div>
+                </div>
+            `;
+            block.dataset.block = blockData.name;
+            block.dataset.category = blockData.category;
+            blockOrder.appendChild(block);
+            loadBlockPreview(blockData.category, blockData.name);
+        });
+        
+        // Search functionality
+        document.getElementById('blockSearch').addEventListener('input', function(e) {
+            const searchText = e.target.value.toLowerCase();
+            document.querySelectorAll('#available-blocks .block-item').forEach(item => {
+                const blockName = item.querySelector('.block-name').textContent.toLowerCase();
+                const category = item.closest('.category-section').querySelector('.category-title').textContent.toLowerCase();
+                const shouldShow = blockName.includes(searchText) || category.includes(searchText);
+                item.style.display = shouldShow ? 'block' : 'none';
+            });
+            
+            // Show/hide category sections based on visible blocks
+            document.querySelectorAll('.category-section').forEach(section => {
+                const hasVisibleBlocks = Array.from(section.querySelectorAll('.block-item'))
+                    .some(item => item.style.display !== 'none');
+                section.style.display = hasVisibleBlocks ? 'block' : 'none';
+            });
+        });
+        
+        // Parameter management
+        function addParameter(button) {
+            const parametersList = button.previousElementSibling;
+            const paramRow = document.createElement('div');
+            paramRow.className = 'parameter-row';
+            paramRow.innerHTML = `
+                <input type="text" class="form-control form-control-sm parameter-name" placeholder="اسم المتغير">
+                <div class="parameter-value-container">
+                    <div class="parameter-type">
+                        <div class="form-check">
+                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="direct" checked onchange="toggleParameterType(this)">
+                            <label class="form-check-label">قيمة مباشرة</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="block" onchange="toggleParameterType(this)">
+                            <label class="form-check-label">بلوك</label>
+                        </div>
+                    </div>
+                    <div class="parameter-value-direct">
+                        <input type="text" class="form-control form-control-sm parameter-value" placeholder="قيمة المتغير">
+                    </div>
+                    <div class="parameter-value-block d-none">
+                        <select class="form-control form-control-sm parameter-block-select">
+                            <option value="">اختر البلوك...</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-outline-danger" onclick="removeParameter(this)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            `;
+            parametersList.appendChild(paramRow);
+            updateBlockSelects();
+        }
+        
+        function toggleParameterType(radio) {
+            const container = radio.closest('.parameter-value-container');
+            const directInput = container.querySelector('.parameter-value-direct');
+            const blockSelect = container.querySelector('.parameter-value-block');
+            
+            if (radio.value === 'direct') {
+                directInput.classList.remove('d-none');
+                blockSelect.classList.add('d-none');
+            } else {
+                directInput.classList.add('d-none');
+                blockSelect.classList.remove('d-none');
+            }
+        }
+        
+        function updateBlockSelects() {
+            const blockSelects = document.querySelectorAll('.parameter-block-select');
+            blockSelects.forEach(select => {
+                // Clear existing options except the first one
+                while (select.options.length > 1) {
+                    select.remove(1);
+                }
+                
+                // Add options from available blocks
+                document.querySelectorAll('#available-blocks .block-item').forEach(block => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify({
+                        name: block.dataset.block,
+                        category: block.dataset.category
+                    });
+                    option.textContent = block.querySelector('.block-name').textContent;
+                    select.appendChild(option);
+                });
+            });
+        }
+        
+        // Update block selects when blocks are added/removed
+        const observer = new MutationObserver(updateBlockSelects);
+        observer.observe(blockOrder, { childList: true });
+        
+        function removeParameter(button) {
+            button.closest('.parameter-row').remove();
+        }
+        
+        function toggleParameters(button) {
+            const parameters = button.closest('.block-content').querySelector('.block-parameters');
+            parameters.classList.toggle('show');
+        }
+        
+        function removeBlock(button) {
+            button.closest('.block-item').remove();
+        }
+        
+        // Load block preview
+        async function loadBlockPreview(category, blockName) {
+            const response = await fetch(`/preview/${category}/${blockName}`);
+            const data = await response.json();
+            const preview = document.querySelector(`[data-block="${blockName}"] .block-preview`);
+            if (preview) {
+                preview.textContent = data.preview;
+            }
+            
+            // Add default parameters if they exist
+            if (data.parameters && data.parameters.length > 0) {
+                const block = document.querySelector(`[data-block="${blockName}"]`);
+                if (block) {
+                    const parametersList = block.querySelector('.parameters-list');
+                    if (parametersList) {
+                        // Clear existing parameters
+                        parametersList.innerHTML = '';
+                        
+                        // Add default parameters
+                        data.parameters.forEach(param => {
+                            const paramRow = document.createElement('div');
+                            paramRow.className = 'parameter-row';
+                            paramRow.innerHTML = `
+                                <input type="text" class="form-control form-control-sm parameter-name" value="${param}" readonly>
+                                <div class="parameter-value-container">
+                                    <div class="parameter-type">
+                                        <div class="form-check">
+                                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="direct" checked onchange="toggleParameterType(this)">
+                                            <label class="form-check-label">قيمة مباشرة</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="block" onchange="toggleParameterType(this)">
+                                            <label class="form-check-label">بلوك</label>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-value-direct">
+                                        <input type="text" class="form-control form-control-sm parameter-value" placeholder="قيمة المتغير">
+                                    </div>
+                                    <div class="parameter-value-block d-none">
+                                        <select class="form-control form-control-sm parameter-block-select">
+                                            <option value="">اختر البلوك...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="removeParameter(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            `;
+                            parametersList.appendChild(paramRow);
+                        });
+                        
+                        // Show parameters section
+                        const parameters = block.querySelector('.block-parameters');
+                        if (parameters) {
+                            parameters.classList.add('show');
+                        }
+                        
+                        // Update block selects
+                        updateBlockSelects();
+                    }
+                }
+            }
+        }
+        
+        // Add new function to automatically fetch and add variables
+        async function fetchVariables(button) {
+            const block = button.closest('.block-item');
+            const category = block.dataset.category;
+            const blockName = block.dataset.block;
+            
+            try {
+                const response = await fetch(`/preview/${category}/${blockName}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                if (data.parameters && data.parameters.length > 0) {
+                    const parametersList = block.querySelector('.parameters-list');
+                    if (parametersList) {
+                        // Clear existing parameters
+                        parametersList.innerHTML = '';
+                        
+                        // Add detected parameters
+                        data.parameters.forEach(param => {
+                            const paramRow = document.createElement('div');
+                            paramRow.className = 'parameter-row';
+                            paramRow.innerHTML = `
+                                <input type="text" class="form-control form-control-sm parameter-name" value="${param}" readonly>
+                                <div class="parameter-value-container">
+                                    <div class="parameter-type">
+                                        <div class="form-check">
+                                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="direct" checked onchange="toggleParameterType(this)">
+                                            <label class="form-check-label">قيمة مباشرة</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input parameter-type-radio" type="radio" name="param-type-${Date.now()}" value="block" onchange="toggleParameterType(this)">
+                                            <label class="form-check-label">بلوك</label>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-value-direct">
+                                        <input type="text" class="form-control form-control-sm parameter-value" placeholder="قيمة المتغير">
+                                    </div>
+                                    <div class="parameter-value-block d-none">
+                                        <select class="form-control form-control-sm parameter-block-select">
+                                            <option value="">اختر البلوك...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="removeParameter(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            `;
+                            parametersList.appendChild(paramRow);
+                        });
+                        
+                        // Show parameters section
+                        const parameters = block.querySelector('.block-parameters');
+                        if (parameters) {
+                            parameters.classList.add('show');
+                        }
+                        
+                        // Update block selects
+                        updateBlockSelects();
+                        
+                        // Show success message
+                        alert('تم جلب المتغيرات بنجاح');
+                    }
+                } else {
+                    alert('لم يتم العثور على متغيرات في هذا البلوك');
+                }
+            } catch (error) {
+                alert('حدث خطأ أثناء جلب المتغيرات: ' + error.message);
+            }
+        }
+        
+        // Build prompt
+        async function buildPrompt() {
+            const blocks = Array.from(document.querySelectorAll('#block-order .block-item'));
+            const blockData = blocks.map(block => {
+                const blockName = block.dataset.block;
+                const category = block.dataset.category;
+                const parameters = {};
+                block.querySelectorAll('.parameter-row').forEach(row => {
+                    const name = row.querySelector('.parameter-name').value;
+                    if (!name) return;
+                    
+                    const typeRadio = row.querySelector('input[type="radio"]:checked');
+                    if (typeRadio.value === 'direct') {
+                        const value = row.querySelector('.parameter-value').value;
+                        if (value) {
+                            parameters[name] = value;
+                        }
+                    } else {
+                        const blockSelect = row.querySelector('.parameter-block-select');
+                        const selectedBlock = blockSelect.value;
+                        if (selectedBlock) {
+                            parameters[name] = JSON.parse(selectedBlock);
+                        }
+                    }
+                });
+                return {
+                    name: blockName,
+                    category: category,
+                    parameters: parameters
+                };
+            });
+            
+            try {
+                const response = await fetch('/build', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        blocks: blockData,
+                        focus_message: document.getElementById('focusMessage').value
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                const result = document.getElementById('result');
+                result.textContent = data.prompt;
+                result.classList.remove('d-none');
+            } catch (error) {
+                alert('حدث خطأ أثناء بناء البرومبت: ' + error.message);
+            }
+        }
+        
+        // Preview prompt
+        async function previewPrompt() {
+            const blocks = Array.from(document.querySelectorAll('#block-order .block-item'));
+            if (blocks.length === 0) {
+                alert('الرجاء إضافة بلوك واحد على الأقل');
+                return;
+            }
+            
+            const blockData = blocks.map(block => {
+                const blockName = block.dataset.block;
+                const category = block.dataset.category;
+                const parameters = {};
+                block.querySelectorAll('.parameter-row').forEach(row => {
+                    const name = row.querySelector('.parameter-name').value;
+                    if (!name) return;
+                    
+                    const typeRadio = row.querySelector('input[type="radio"]:checked');
+                    if (typeRadio.value === 'direct') {
+                        const value = row.querySelector('.parameter-value').value;
+                        if (value) {
+                            parameters[name] = value;
+                        }
+                    } else {
+                        const blockSelect = row.querySelector('.parameter-block-select');
+                        const selectedBlock = blockSelect.value;
+                        if (selectedBlock) {
+                            parameters[name] = JSON.parse(selectedBlock);
+                        }
+                    }
+                });
+                return {
+                    name: blockName,
+                    category: category,
+                    parameters: parameters
+                };
+            });
+            
+            try {
+                const response = await fetch('/preview', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        blocks: blockData,
+                        focus_message: document.getElementById('focusMessage').value
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                const result = document.getElementById('result');
+                result.textContent = data.preview;
+                result.classList.remove('d-none');
+            } catch (error) {
+                alert('حدث خطأ أثناء معاينة البرومبت: ' + error.message);
+            }
+        }
+        
+        // Copy to clipboard
+        function copyToClipboard() {
+            const result = document.getElementById('result');
+            if (result.textContent) {
+                navigator.clipboard.writeText(result.textContent)
+                    .then(() => alert('تم نسخ البرومبت بنجاح'))
+                    .catch(err => alert('حدث خطأ أثناء النسخ: ' + err));
+            }
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+    </script>
+</body>
+</html>

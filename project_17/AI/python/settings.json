@@ -1,0 +1,17 @@
+{
+    "language": "ar",
+    "dark_mode": true,
+    "font": {
+        "family": "Arial",
+        "size": 10,
+        "style": "bold"
+    },
+    "colors": {
+        "background": "#ff4242",
+        "text": "#b1d26f",
+        "button": "#404040",
+        "entry": "#404040",
+        "entry_text": "#ffffff",
+        "highlight": "#1a1a1a"
+    }
+}
