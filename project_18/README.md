@@ -53,17 +53,6 @@ A powerful tool to convert text between English and Arabic keyboard layouts with
    python main.py
    ```
 
-### Method 2: Using setup.py
-1. Clone or download this repository
-2. Navigate to the project directory
-3. Install the package:
-   ```
-   pip install .
-   ```
-4. Run the application:
-   ```
-   keyboard-flipper
-   ```
 
 ## Usage
 
@@ -251,5 +240,6 @@ The application converts between the standard QWERTY English layout and the Arab
 The application also handles numbers and special characters appropriately.
 
 ## Support
+
 
 If you encounter any issues or have questions, please [open an issue](https://github.com/your-username/keyboard-layout-flipper-pro/issues) on GitHub.
