@@ -1,147 +1,174 @@
-# Keyboard Layout Flipper Pro - Simple User Guide
+# برنامج Keyboard Layout Flipper Pro - دليل المستخدم المبسط
 
-Welcome to Keyboard Layout Flipper Pro! This guide will help you use the application without any technical knowledge.
+مرحبًا بك في برنامج **Keyboard Layout Flipper Pro**! هذا الدليل سيساعدك على استخدام البرنامج بسهولة ودون الحاجة لأي معرفة تقنية.
 
-## What Does This Program Do?
+---
 
-This program helps you convert text between English and Arabic keyboard layouts. For example:
-- If you type "Hello" on an Arabic keyboard, it will look like this: "حاللو"
-- This program converts it back to "Hello" in English
-- It works both ways - English to Arabic and Arabic to English
+## ما وظيفة هذا البرنامج؟
 
-## Getting Started - Quick Setup
+البرنامج يساعدك على **تحويل النصوص بين لوحة المفاتيح الإنجليزية والعربية**.
+على سبيل المثال:
 
-1. **Double-click** the program file to start it
-2. You'll see a window with buttons and text boxes - that's the main interface
-3. The program also minimizes to a small icon in the bottom-right corner of your screen (system tray)
+* إذا كتبت "Hello" بلوحة مفاتيح عربية سيظهر "اثممخ"
+* البرنامج يعيدها تلقائيًا إلى "Hello"
+* ويعمل بالعكس أيضًا: من الإنجليزية إلى العربية والعكس.
 
-## How to Use - Two Easy Methods
+---
 
-### Method 1: Quick Conversion (Recommended)
-This is the fastest way to convert text anywhere on your computer:
+## بدء الاستخدام - إعداد سريع
 
-1. **Select text** - Highlight any text you want to convert (in any program - browser, Word, etc.)
-2. **Press Ctrl+Shift** - Hold both buttons at the same time
-3. **Magic!** - The text automatically converts and replaces the original
+1. **انقر مرتين** على ملف البرنامج لتشغيله.
+2. ستظهر لك نافذة فيها أزرار وصناديق نصوص (واجهة البرنامج).
+3. البرنامج سيظهر أيضًا كأيقونة صغيرة في **شريط المهام بجانب الساعة** (System Tray).
 
-**Examples:**
-- Select "اثممخ" and press Ctrl+Shift → becomes "Hello"
-- Select "Hello" and press Ctrl+Shift → becomes "اثممخ"
+---
 
-### Method 2: Manual Conversion
-Use this when you want to type or paste text directly:
+## طرق الاستخدام - طريقتان سهلتان
 
-1. **Type or paste** your text in the top box (Input Text)
-2. **Click Convert** - Press the blue "Convert" button
-3. **See result** - The converted text appears in the bottom box (Output Text)
-4. **Copy result** - Click "Copy Output" to copy the result to clipboard
+### الطريقة 1: التحويل السريع (موصى بها)
 
-## System Tray - Your Quick Access
+1. **حدد النص** الذي تريد تحويله (في أي برنامج: المتصفح، Word، إلخ).
+2. **اضغط Ctrl + Shift** معًا.
+3. ✨ سيتم التحويل تلقائيًا واستبدال النص الأصلي.
 
-When you close the program window, it doesn't really close - it goes to the system tray (bottom-right corner):
+**أمثلة:**
 
-- **Right-click** the icon for menu options:
-  - Show - Bring back the main window
-  - Convert Clipboard - Convert whatever text you copied last
-  - Enable/Disable Hotkey - Turn the Ctrl+Shift feature on/off
-  - Remove from Startup - Stop program from starting automatically
-  - Quit - Completely close the program
+* "اثممخ" + Ctrl+Shift → تصبح "Hello"
+* "Hello" + Ctrl+Shift → تصبح "اثممخ"
 
-- **Left-click** the icon to quickly show the main window
+---
 
-## Essential Settings You Should Know
+### الطريقة 2: التحويل اليدوي
 
-Click the gear icon (⚙) in the top-right corner to access settings:
+1. اكتب أو ألصق النص في المربع العلوي (Input Text).
+2. **اضغط زر التحويل** (Convert).
+3. ستظهر النتيجة في المربع السفلي (Output Text).
+4. انسخ النتيجة بالضغط على "Copy Output".
 
-### Change the Shortcut Keys
-Don't like Ctrl+Shift? Change it:
-1. Click the gear icon
-2. Type your new shortcut in "Current hotkey" (like "Ctrl+Alt+Z")
-3. Click "Save Settings"
-4. Restart the program (close and open again)
+---
 
-### Start Automatically
-Make the program start when you turn on your computer:
-1. Click the gear icon
-2. Check "Run on Windows startup"
-3. Click "Save Settings"
+## أيقونة البرنامج في شريط النظام
 
-### Other Useful Options
-- **Start minimized** - Program opens in system tray instead of main window
-- **Show notifications** - See confirmation messages
-- **Enable conversion history** - Keep track of your conversions
+عند إغلاق نافذة البرنامج، لا يغلق تمامًا بل يذهب إلى **شريط النظام**:
 
-## Pro Tips & Tricks
+* **زر أيمن** على الأيقونة → قائمة الخيارات:
 
-### Tip 1: Instant Clipboard Conversion
-1. Copy any text (Ctrl+C)
-2. Right-click the system tray icon
-3. Click "Convert Clipboard"
-4. Paste the converted text anywhere (Ctrl+V)
+  * Show: إظهار النافذة
+  * Convert Clipboard: تحويل النص الموجود في الحافظة
+  * Enable/Disable Hotkey: تفعيل أو تعطيل الاختصار Ctrl+Shift
+  * Remove from Startup: تعطيل التشغيل التلقائي مع ويندوز
+  * Quit: إغلاق البرنامج تمامًا
 
-### Tip 2: Quick Actions
-The buttons under the "Quick Actions" section do useful things:
-- Convert Clipboard - Convert whatever is in your clipboard
-- Open History - See all your previous conversions
-- Clear History - Delete your conversion history
-- Export Text - Save your converted text to a file
+* **زر أيسر** على الأيقونة → يعيد النافذة مباشرة.
 
-### Tip 3: Language Detection
-The program automatically detects which language your text is in, so you don't need to tell it "this is English" or "this is Arabic" - it figures it out by itself!
+---
 
-### Tip 4: Keyboard Shortcuts (For the Main Window)
-When the main window is active:
-- Ctrl+Enter = Convert text
-- Ctrl+C = Copy output
-- Ctrl+V = Paste input
-- Ctrl+L = Clear everything
-- Ctrl+H = Show this help
-- Esc = Hide to system tray
+## الإعدادات الأساسية
 
-## Troubleshooting - Quick Fixes
+اضغط على أيقونة ⚙ (الإعدادات) في أعلى الواجهة:
 
-### Problem: Ctrl+Shift doesn't work
-**Solution:** 
-1. Right-click the system tray icon
-2. Click "Enable/Disable Hotkey" to make sure it's enabled
-3. If still not working, restart the program as administrator (right-click program file → "Run as administrator")
+### تغيير أزرار الاختصار
 
-### Problem: Wrong conversion
-**Solution:**
-1. Make sure you're not mixing English and Arabic in the same text
-2. Try selecting smaller pieces of text
-3. Use manual conversion instead of the quick method
+* لا يعجبك Ctrl+Shift؟ غيّره:
 
-### Problem: Program doesn't start automatically
-**Solution:**
-1. Click the gear icon
-2. Make sure "Run on Windows startup" is checked
-3. Click "Save Settings"
-4. Restart your computer to test
+1. اضغط ⚙
+2. أدخل اختصارًا جديدًا (مثال: Ctrl+Alt+Z).
+3. اضغط "Save Settings".
+4. أعد تشغيل البرنامج.
 
-### Problem: Forgot to save converted text
-**Solution:**
-1. Open "History" from quick actions or View menu
-2. Find your conversion
-3. Copy what you need
+### تشغيل البرنامج تلقائيًا
 
-## Need More Help?
+1. اضغط ⚙
+2. ضع علامة ✓ على "Run on Windows startup".
+3. احفظ الإعدادات.
 
-- Check the "Keyboard Shortcuts" option in the Help menu (? button)
-- View "Statistics" to see how much you've converted
-- Read the detailed USER_GUIDE.md file for more technical information
+### خيارات إضافية
 
-## Quick Reference Card
+* **بدء مصغرًا** → يظهر في الشريط فقط.
+* **إظهار إشعارات** → رسائل تأكيد بعد التحويل.
+* **تاريخ التحويلات** → سجل بكل النصوص التي حوّلتها.
 
-| Action | How to Do It |
-|--------|-------------|
-| Quick convert any text | Select text + Ctrl+Shift |
-| Manual convert | Type in top box + Click "Convert" |
-| Copy result | Click "Copy Output" or Ctrl+C |
-| Hide program | Click X or press Esc |
-| Show program | Click system tray icon |
-| Change settings | Click gear icon (⚙) |
-| Convert clipboard | System tray → Convert Clipboard |
-| Enable/Disable hotkey | System tray → Enable/Disable Hotkey |
+---
 
-Remember: This program makes converting between English and Arabic keyboards super easy - no more manual retyping!
+## نصائح وحيل
+
+### الحيلة 1: تحويل النصوص من الحافظة
+
+1. انسخ النص (Ctrl+C).
+2. اضغط بالزر الأيمن على الأيقونة.
+3. اختر "Convert Clipboard".
+4. ألصق النتيجة (Ctrl+V).
+
+### الحيلة 2: الإجراءات السريعة
+
+من قسم "Quick Actions":
+
+* Convert Clipboard → تحويل النص المنسوخ.
+* Open History → عرض السجل.
+* Clear History → مسح السجل.
+* Export Text → حفظ النص في ملف.
+
+### الحيلة 3: اكتشاف اللغة تلقائيًا
+
+البرنامج يحدد اللغة (عربية أو إنجليزية) تلقائيًا، لا حاجة للاختيار يدويًا.
+
+### الحيلة 4: اختصارات النافذة الرئيسية
+
+* Ctrl+Enter = تحويل
+* Ctrl+C = نسخ النتيجة
+* Ctrl+V = لصق النص
+* Ctrl+L = مسح الكل
+* Ctrl+H = إظهار المساعدة
+* Esc = إخفاء النافذة إلى الشريط
+
+---
+
+## استكشاف الأخطاء
+
+### المشكلة: Ctrl+Shift لا يعمل
+
+**الحل:**
+
+1. زر أيمن على الأيقونة → Enable/Disable Hotkey
+2. إذا لم ينجح، شغّل البرنامج كمسؤول (Run as Administrator).
+
+### المشكلة: التحويل غير صحيح
+
+**الحل:**
+
+1. لا تخلط بين الإنجليزية والعربية في نفس النص.
+2. جرّب تحديد نصوص أقصر.
+3. استخدم التحويل اليدوي.
+
+### المشكلة: البرنامج لا يبدأ مع الويندوز
+
+**الحل:**
+
+1. تأكد من تفعيل خيار "Run on Windows startup".
+2. اضغط "Save Settings".
+3. أعد تشغيل الكمبيوتر.
+
+### المشكلة: نسيت نسخ النص المحوّل
+
+**الحل:**
+
+* افتح "History" من القائمة أو الإجراءات السريعة وابحث عن التحويل السابق.
+
+---
+
+## بطاقة مرجعية سريعة
+
+| الإجراء              | الطريقة                               |
+| -------------------- | ------------------------------------- |
+| تحويل سريع           | تحديد النص + Ctrl+Shift               |
+| تحويل يدوي           | كتابة النص + Convert                  |
+| نسخ النتيجة          | Copy Output أو Ctrl+C                 |
+| إخفاء البرنامج       | X أو Esc                              |
+| إظهار البرنامج       | أيقونة الشريط                         |
+| تغيير الإعدادات      | ⚙ (الإعدادات)                         |
+| تحويل الحافظة        | أيقونة الشريط → Convert Clipboard     |
+| تفعيل/تعطيل الاختصار | أيقونة الشريط → Enable/Disable Hotkey |
+
+---
+
+💡 هذا البرنامج يجعل التحويل بين العربية والإنجليزية أسهل بكثير - وداعًا لإعادة الكتابة يدويًا!
