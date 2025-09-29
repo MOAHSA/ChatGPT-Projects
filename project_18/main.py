@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import keyboard
@@ -31,7 +32,7 @@ eng_to_ar = {
     "Z": "~",
     
     # Numbers
-    "1": "١", "2": "٢", "3": "٣", "4": "٤", "5": "٥",
+    "1": "٢", "2": "٢", "3": "٣", "4": "٤", "5": "٥",
     "6": "٦", "7": "٧", "8": "٨", "9": "٩", "0": "٠",
     
     # Special characters
@@ -100,6 +101,10 @@ class LayoutFlipperApp:
         # Load configuration
         self.load_config()
         
+        # Set startup if enabled in config
+        if self.config["run_on_startup"]:
+            self.set_startup(True)
+        
         self.setup_gui()
         self.setup_hotkey()
         self.setup_tray_icon()
@@ -116,7 +121,8 @@ class LayoutFlipperApp:
             "start_minimized": False,
             "theme": "dark",
             "show_notifications": True,
-            "history_enabled": True
+            "history_enabled": True,
+            "hotkey": "ctrl+shift"  # Add default hotkey to config
         }
         
         if CONFIG_FILE.exists():
@@ -128,6 +134,7 @@ class LayoutFlipperApp:
                 pass
         
         self.hotkey_enabled = self.config["hotkey_enabled"]
+        self.hotkey = self.config["hotkey"]  # Load hotkey from config
     
     def save_config(self):
         """Save configuration to file"""
@@ -135,11 +142,11 @@ class LayoutFlipperApp:
             with open(CONFIG_FILE, 'w') as f:
                 json.dump(self.config, f, indent=2)
         except Exception as e:
-            print(f"Error saving config: {e}")
+            print("Error saving config: {}".format(e))
     
     def setup_gui(self):
         """Setup the GUI"""
-        self.root.title("Keyboard Layout Flipper Pro")
+        self.root.title("Keyboard Layout Flipper Pro v2.1")
         self.root.geometry("850x700")
         self.root.configure(bg="#1a1a1a")
         self.root.resizable(True, True)
@@ -256,7 +263,9 @@ class LayoutFlipperApp:
         toggle_frame = ttk.Frame(status_inner)
         toggle_frame.pack(anchor="w", pady=(10, 0))
         
-        self.hotkey_toggle = ttk.Checkbutton(toggle_frame, text="Enable System-Wide Hotkey (Ctrl+Shift)",
+        # Update the label to show the current hotkey
+        self.hotkey_toggle = ttk.Checkbutton(toggle_frame, 
+                                            text="Enable System-Wide Hotkey ({})".format(self.config['hotkey'].upper()),
                                             command=self.toggle_hotkey)
         if self.hotkey_enabled:
             self.hotkey_toggle.state(['selected'])
@@ -349,7 +358,7 @@ class LayoutFlipperApp:
         # Update character count on input
         def update_char_count(event=None):
             text = self.input_box.get("1.0", tk.END).strip()
-            self.input_char_count.config(text=f"{len(text)} characters")
+            self.input_char_count.config(text="{} characters".format(len(text)))
         self.input_box.bind("<KeyRelease>", update_char_count)
         
         # Buttons frame
@@ -392,7 +401,7 @@ class LayoutFlipperApp:
                                       foreground="#4CAF50", font=("Segoe UI", 9, "bold"))
         self.status_label.pack(side="left")
         
-        version_label = ttk.Label(status_inner_bar, text="v2.0", 
+        version_label = ttk.Label(status_inner_bar, text="v2.1", 
                                   foreground="#666", font=("Segoe UI", 8))
         version_label.pack(side="right")
         
@@ -443,6 +452,7 @@ class LayoutFlipperApp:
         help_menu = tk.Menu(menubar, tearoff=0, bg="#2d2d30", fg="#e0e0e0")
         menubar.add_cascade(label="Help", menu=help_menu)
         help_menu.add_command(label="Keyboard Shortcuts", command=self.show_shortcuts, accelerator="Ctrl+H")
+        help_menu.add_command(label="Remove from Startup", command=self.remove_from_startup)
         help_menu.add_command(label="About", command=self.show_about)
     
     def setup_hotkey(self):
@@ -480,14 +490,15 @@ class LayoutFlipperApp:
                     self.root.after(0, self.flash_status, "✓ Text converted!")
                     
             except Exception as e:
-                print(f"Error in hotkey callback: {e}")
+                print("Error in hotkey callback: {}".format(e))
         
         def register_hotkey():
             try:
-                keyboard.add_hotkey('ctrl+shift', hotkey_callback, suppress=False)
+                # Use the configurable hotkey instead of hardcoded 'ctrl+shift'
+                keyboard.add_hotkey(self.config["hotkey"], hotkey_callback, suppress=True)
             except Exception as e:
                 self.root.after(0, lambda: messagebox.showerror("Hotkey Error", 
-                    f"Failed to register hotkey. Try running as administrator.\n\nError: {e}"))
+                    "Failed to register hotkey. Try running as administrator.\n\nError: {}".format(e)))
         
         Thread(target=register_hotkey, daemon=True).start()
     
@@ -511,11 +522,12 @@ class LayoutFlipperApp:
             MenuItem('Show', on_show, default=True),
             MenuItem('Convert Clipboard', lambda: self.convert_clipboard()),
             MenuItem('Enable/Disable Hotkey', lambda: self.toggle_hotkey()),
+            MenuItem('Remove from Startup', lambda: self.remove_from_startup()),
             MenuItem('Quit', on_quit)
         )
         
         self.tray_icon = Icon("KeyboardFlipper", create_icon_image(), 
-                              "Keyboard Layout Flipper", menu)
+                              "Keyboard Layout Flipper Pro v2.1", menu)
         
         Thread(target=self.tray_icon.run, daemon=True).start()
     
@@ -537,9 +549,12 @@ class LayoutFlipperApp:
         self.config["hotkey_enabled"] = self.hotkey_enabled
         self.save_config()
         
+        # Update the toggle button text
+        self.hotkey_toggle.config(text="Enable System-Wide Hotkey ({})".format(self.config['hotkey'].upper()))
+        
         if self.hotkey_enabled:
             self.hotkey_status_label.config(
-                text="✓ Press Ctrl+Shift to convert selected text anywhere!",
+                text="✓ Press {} to convert selected text anywhere!".format(self.config['hotkey'].upper()),
                 foreground="#4CAF50")
             self.hotkey_badge.config(text="ACTIVE", bg="#4CAF50")
             self.flash_status("Hotkey enabled")
@@ -552,8 +567,8 @@ class LayoutFlipperApp:
     
     def update_conversion_count(self):
         """Update the conversion counter"""
-        self.conversion_label.config(text=f"Conversions: {self.conversion_count}")
-        self.last_conversion_label.config(text=f"Last: {time.strftime('%H:%M:%S')}")
+        self.conversion_label.config(text="Conversions: {}".format(self.conversion_count))
+        self.last_conversion_label.config(text="Last: {}".format(time.strftime('%H:%M:%S')))
     
     def flash_status(self, message):
         """Flash a status message"""
@@ -580,7 +595,7 @@ class LayoutFlipperApp:
         self.output_box.insert(tk.END, converted)
         self.output_box.config(state='disabled')
         
-        self.output_char_count.config(text=f"{len(converted)} characters")
+        self.output_char_count.config(text="{} characters".format(len(converted)))
         self.flash_status("Text converted")
         
         if self.config["history_enabled"]:
@@ -627,7 +642,7 @@ class LayoutFlipperApp:
             self.input_box.delete("1.0", tk.END)
             self.input_box.insert("1.0", text)
         except Exception as e:
-            print(f"Paste error: {e}")
+            print("Paste error: {}".format(e))
     
     def convert_clipboard(self):
         """Convert text from clipboard and put it back"""
@@ -639,11 +654,11 @@ class LayoutFlipperApp:
                 self.conversion_count += 1
                 self.update_conversion_count()
                 self.flash_status("✓ Clipboard converted!")
-                messagebox.showinfo("Success", f"Clipboard text converted!\n\nOriginal: {text[:50]}...\nConverted: {converted[:50]}...")
+                messagebox.showinfo("Success", "Clipboard text converted!\n\nOriginal: {}...\nConverted: {}...".format(text[:50], converted[:50]))
             else:
                 messagebox.showwarning("Empty Clipboard", "Clipboard is empty!")
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to convert clipboard: {e}")
+            messagebox.showerror("Error", "Failed to convert clipboard: {}".format(e))
     
     def show_history(self):
         """Show conversion history"""
@@ -676,9 +691,9 @@ class LayoutFlipperApp:
         scrollbar.config(command=history_text.yview)
         
         for i, entry in enumerate(reversed(self.history), 1):
-            history_text.insert("end", f"━━━ Entry {i} ━━━ {entry['time']} ━━━\n", "header")
-            history_text.insert("end", f"Original:  {entry['original']}\n", "original")
-            history_text.insert("end", f"Converted: {entry['converted']}\n\n", "converted")
+            history_text.insert("end", "━━━ Entry {} ━━━ {} ━━━\n".format(i, entry['time']), "header")
+            history_text.insert("end", "Original:  {}\n".format(entry['original']), "original")
+            history_text.insert("end", "Converted: {}\n\n".format(entry['converted']), "converted")
         
         history_text.tag_config("header", foreground="#61dafb", font=("Segoe UI", 10, "bold"))
         history_text.tag_config("original", foreground="#ff6b6b")
@@ -714,7 +729,7 @@ class LayoutFlipperApp:
         for label, value in stats:
             stat_frame = ttk.Frame(frame)
             stat_frame.pack(fill="x", pady=5)
-            ttk.Label(stat_frame, text=f"{label}:", 
+            ttk.Label(stat_frame, text="{}:".format(label), 
                      font=("Segoe UI", 11, "bold")).pack(side="left")
             ttk.Label(stat_frame, text=str(value), 
                      font=("Segoe UI", 11), foreground="#61dafb").pack(side="right")
@@ -723,7 +738,7 @@ class LayoutFlipperApp:
         """Show settings window"""
         settings_window = tk.Toplevel(self.root)
         settings_window.title("Settings")
-        settings_window.geometry("550x450")
+        settings_window.geometry("550x500")  # Increased height to accommodate new settings
         settings_window.configure(bg="#1a1a1a")
         
         frame = ttk.Frame(settings_window, padding=20)
@@ -732,12 +747,33 @@ class LayoutFlipperApp:
         ttk.Label(frame, text="⚙️ Settings", 
                   font=("Segoe UI", 14, "bold"), foreground="#61dafb").pack(pady=(0, 20))
         
+        # Hotkey customization
+        ttk.Label(frame, text="Hotkey Settings:", font=("Segoe UI", 11, "bold")).pack(anchor="w")
+        
+        hotkey_frame = ttk.Frame(frame)
+        hotkey_frame.pack(fill="x", pady=5)
+        
+        ttk.Label(hotkey_frame, text="Current hotkey:").pack(side="left")
+        self.hotkey_var = tk.StringVar(value=self.config["hotkey"])
+        hotkey_entry = ttk.Entry(hotkey_frame, textvariable=self.hotkey_var, width=20)
+        hotkey_entry.pack(side="left", padx=10)
+        ttk.Label(hotkey_frame, text="e.g., ctrl+shift, alt+z, ctrl+alt+t").pack(side="left")
+        
         # Run on startup
         startup_var = tk.BooleanVar(value=self.config["run_on_startup"])
+        def on_startup_toggle():
+            enable = startup_var.get()
+            self.set_startup(enable)
+            # Also save to config immediately
+            self.config["run_on_startup"] = enable
+            self.save_config()
         startup_cb = ttk.Checkbutton(frame, text="Run on Windows startup",
                                      variable=startup_var,
-                                     command=lambda: self.set_startup(startup_var.get()))
+                                     command=on_startup_toggle)
         startup_cb.pack(anchor="w", pady=5)
+        
+        # Add button to remove from startup
+        ttk.Button(frame, text="Remove from Startup", command=self.remove_from_startup).pack(anchor="w", pady=5)
         
         # Start minimized
         minimized_var = tk.BooleanVar(value=self.config["start_minimized"])
@@ -761,12 +797,27 @@ class LayoutFlipperApp:
         
         # Save button
         def save_settings():
+            # Update hotkey in config
+            self.config["hotkey"] = self.hotkey_var.get().lower()
             self.config["start_minimized"] = minimized_var.get()
             self.config["show_notifications"] = notif_var.get()
             self.config["history_enabled"] = history_var.get()
+            # Note: run_on_startup is handled by the checkbox callback
             self.save_config()
+            
+            # Update the toggle button text
+            self.hotkey_toggle.config(text="Enable System-Wide Hotkey ({})".format(self.config['hotkey'].upper()))
+            
+            # Update hotkey status label
+            if self.hotkey_enabled:
+                self.hotkey_status_label.config(
+                    text="✓ Press {} to convert selected text anywhere!".format(self.config['hotkey'].upper()))
+            
             self.flash_status("Settings saved")
             settings_window.destroy()
+            
+            # Show message about restarting for hotkey changes
+            messagebox.showinfo("Hotkey Change", "Restart the application for hotkey changes to take effect.")
         
         ttk.Button(frame, text="Save Settings", command=save_settings,
                   style="Accent.TButton").pack(pady=10)
@@ -786,20 +837,31 @@ class LayoutFlipperApp:
                     value = f'"{exe_path}" --minimized'
                 
                 winreg.SetValueEx(key, "KeyboardFlipperPro", 0, winreg.REG_SZ, value)
-                self.flash_status("✓ Added to startup")
+                # Only flash status if GUI is initialized
+                if hasattr(self, 'status_label'):
+                    self.flash_status("✓ Added to startup")
             else:
                 try:
                     winreg.DeleteValue(key, "KeyboardFlipperPro")
-                    self.flash_status("✓ Removed from startup")
+                    # Only flash status if GUI is initialized
+                    if hasattr(self, 'status_label'):
+                        self.flash_status("✓ Removed from startup")
                 except FileNotFoundError:
-                    pass
+                    # Only flash status if GUI is initialized
+                    if hasattr(self, 'status_label'):
+                        self.flash_status("Already removed from startup")
             
             winreg.CloseKey(key)
             self.config["run_on_startup"] = enable
             self.save_config()
             
         except Exception as e:
-            messagebox.showerror("Startup Error", f"Failed to modify startup settings:\n{e}")
+            messagebox.showerror("Startup Error", "Failed to modify startup settings:\n{}".format(e))
+    
+    def remove_from_startup(self):
+        """Remove the application from Windows startup"""
+        self.set_startup(False)
+        messagebox.showinfo("Success", "Application removed from Windows startup.")
     
     def export_text(self):
         """Export output text to file"""
@@ -817,9 +879,9 @@ class LayoutFlipperApp:
             try:
                 with open(filename, 'w', encoding='utf-8') as f:
                     f.write(text)
-                self.flash_status(f"✓ Exported to {os.path.basename(filename)}")
+                self.flash_status("✓ Exported to {}".format(os.path.basename(filename)))
             except Exception as e:
-                messagebox.showerror("Export Error", f"Failed to export: {e}")
+                messagebox.showerror("Export Error", "Failed to export: {}".format(e))
     
     def import_text(self):
         """Import text from file"""
@@ -833,9 +895,9 @@ class LayoutFlipperApp:
                     text = f.read()
                 self.input_box.delete("1.0", tk.END)
                 self.input_box.insert("1.0", text)
-                self.flash_status(f"✓ Imported from {os.path.basename(filename)}")
+                self.flash_status("✓ Imported from {}".format(os.path.basename(filename)))
             except Exception as e:
-                messagebox.showerror("Import Error", f"Failed to import: {e}")
+                messagebox.showerror("Import Error", "Failed to import: {}".format(e))
     
     def show_shortcuts(self):
         """Display keyboard shortcuts help"""
@@ -845,7 +907,7 @@ class LayoutFlipperApp:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🔥 SYSTEM-WIDE HOTKEY:
-    Ctrl + Shift        Auto-convert selected text anywhere!
+    {}        Auto-convert selected text anywhere!
 
 📝 MANUAL CONVERSION:
     Ctrl + Enter        Convert text
@@ -862,29 +924,32 @@ class LayoutFlipperApp:
 HOW TO USE SYSTEM-WIDE HOTKEY:
 
 1. Select any text anywhere (browser, Word, etc.)
-2. Press Ctrl + Shift together
+2. Press {} together
 3. Text automatically converts and replaces!
 
 The app auto-detects if text is Arabic or English.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        """
+        """.format(self.config['hotkey'].upper(), self.config['hotkey'].upper())
         messagebox.showinfo("Keyboard Shortcuts", shortcuts)
     
     def show_about(self):
         """Show about dialog"""
         about_text = """
-Keyboard Layout Flipper Pro v2.0
+Keyboard Layout Flipper Pro v2.1
 
 A powerful tool to convert text between 
 English and Arabic keyboard layouts.
 
 Features:
-• System-wide hotkey (Ctrl+Shift)
+• System-wide hotkey (customizable)
 • Auto language detection
 • Conversion history
 • System tray integration
 • Run on startup
 • Export/Import functionality
+• Settings panel
+
+Enhanced with customizable hotkeys and improved startup functionality.
 
 Created with ❤️ for productivity
         """
