@@ -1,129 +1,165 @@
-# Frequently Asked Questions (FAQ)
+# الأسئلة الشائعة (FAQ)
 
-## General Questions
+## أسئلة عامة
 
-### What does this program do?
-Keyboard Layout Flipper Pro helps you convert text between English and Arabic keyboard layouts. If you accidentally type in the wrong language, this program fixes it instantly.
+### ما وظيفة هذا البرنامج؟
 
-### Do I need to know programming to use this?
-No! This program is designed for everyone. Just follow the simple steps in the User Guide.
+برنامج **Keyboard Layout Flipper Pro** يساعدك على تحويل النصوص بين لوحات المفاتيح الإنجليزية والعربية. إذا كتبت بلغة خاطئة بالخطأ، يقوم البرنامج بإصلاحها فورًا.
 
-### Is this program free?
-Yes, it's completely free to use.
+### هل أحتاج لمعرفة البرمجة لاستخدامه؟
 
-### Which operating systems does it work on?
-It works on Windows 10 and Windows 11. Other Windows versions might work but haven't been tested.
+لا! البرنامج مصمم للجميع. فقط اتبع الخطوات البسيطة في دليل الاستخدام.
 
-## Using the Program
+### هل البرنامج مجاني؟
 
-### How do I convert text quickly?
-1. Select any text (highlight it)
-2. Press Ctrl+Shift at the same time
-3. The text automatically converts!
+نعم، البرنامج مجاني بالكامل.
 
-### What if Ctrl+Shift doesn't work?
-- Try right-clicking the system tray icon and selecting "Enable/Disable Hotkey" to make sure it's turned on
-- Try running the program as administrator (right-click the program file → "Run as administrator")
-- Change the hotkey in Settings to something else
+### ما أنظمة التشغيل التي يعمل عليها؟
 
-### How do I change the shortcut keys?
-1. Click the gear icon (⚙) in the top-right corner
-2. Type your new shortcut in the "Current hotkey" box (like "Ctrl+Alt+Z")
-3. Click "Save Settings"
-4. Close and reopen the program
+يعمل على Windows 10 وWindows 11. قد يعمل على إصدارات أقدم لكنه لم يُختبر عليها.
 
-### Can I convert text without selecting it first?
-Yes! Use the manual method:
-1. Copy the text you want to convert (Ctrl+C)
-2. Right-click the system tray icon (bottom-right corner)
-3. Click "Convert Clipboard"
-4. Paste the converted text anywhere (Ctrl+V)
+---
 
-### How do I see my previous conversions?
-1. Click the gear icon (⚙)
-2. Make sure "Enable conversion history" is checked
-3. Click "Save Settings"
-4. To view history: Click "Open History" button or go to View → History
+## استخدام البرنامج
 
-## Startup and System Tray
+### كيف أحوّل النص بسرعة؟
 
-### How do I make the program start automatically?
-1. Click the gear icon (⚙)
-2. Check "Run on Windows startup"
-3. Click "Save Settings"
-4. Restart your computer to test
+1. حدّد النص (قم بتظليله).
+2. اضغط **Ctrl+Shift** في نفس الوقت.
+3. يتم التحويل تلقائيًا!
 
-### How do I completely close the program?
-- Right-click the system tray icon (bottom-right corner)
-- Click "Quit"
+### ماذا لو لم يعمل Ctrl+Shift؟
 
-### What does "minimize to system tray" mean?
-Instead of closing the program completely, it hides to a small icon in the bottom-right corner of your screen. This way it's still running and ready to convert text.
+* انقر بزر الفأرة الأيمن على أيقونة البرنامج في شريط النظام واختر **Enable/Disable Hotkey** للتأكد من تفعيله.
+* جرّب تشغيل البرنامج كمسؤول (Right-click → Run as administrator).
+* غيّر الاختصار من الإعدادات إلى شيء آخر.
 
-### How do I get the main window back?
-- Click the system tray icon (bottom-right corner)
-- Or right-click it and select "Show"
+### كيف أغيّر اختصار لوحة المفاتيح؟
 
-## Problems and Solutions
+1. اضغط على أيقونة ⚙ (الإعدادات).
+2. اكتب اختصارك الجديد في مربع "Current hotkey" (مثال: Ctrl+Alt+Z).
+3. اضغط "Save Settings".
+4. أغلق البرنامج وأعد تشغيله.
 
-### Why does the program add extra letters when I use the hotkey?
-This was a known issue that has been fixed in the latest version. Make sure you're using the newest version of the program.
+### هل يمكنني تحويل نصوص دون تحديدها؟
 
-### The program window is too small/too big
-You can resize the window by dragging the corners or edges. The program remembers your preferred size.
+نعم! استخدم الطريقة اليدوية:
 
-### I can't find the program after minimizing it
-Look in the system tray (bottom-right corner of your screen, near the clock). The program icon looks like "KB" in a blue square.
+1. انسخ النص (Ctrl+C).
+2. زر أيمن على أيقونة البرنامج → **Convert Clipboard**.
+3. الصق النتيجة (Ctrl+V).
 
-### The program crashes when I start it
-- Make sure you have Python installed on your computer
-- Try downloading and reinstalling the program
-- Check that your antivirus software isn't blocking it
+### كيف أرى التحويلات السابقة؟
 
-### My antivirus says this program is dangerous
-This is a false positive. The program is safe, but some antivirus software mistakenly flags it because it can simulate keyboard presses. You may need to add it to your antivirus whitelist.
+1. اضغط ⚙.
+2. فعّل خيار "Enable conversion history".
+3. اضغط "Save Settings".
+4. لعرض السجل: اضغط على "Open History" أو من القائمة View → History.
 
-## Features and Customization
+---
 
-### What's the difference between auto-detect and manual language selection?
-- Auto-detect: The program figures out if your text is English or Arabic automatically
-- Manual: You tell the program which language to convert from and to
+## بدء التشغيل وشريط النظام
 
-### How do I export my converted text?
-1. After converting text, click "Export Text" button
-2. Choose where to save the file
-3. The text is saved as a .txt file you can open in any text editor
+### كيف أجعل البرنامج يبدأ تلقائيًا؟
 
-### Can I import text to convert?
-Yes:
-1. Click "Import Text" button
-2. Select a .txt file
-3. The text appears in the input box ready to convert
+1. اضغط ⚙.
+2. فعّل خيار "Run on Windows startup".
+3. احفظ الإعدادات.
+4. أعد تشغيل الكمبيوتر.
 
-### What are the quick action buttons for?
-- Convert Clipboard: Convert whatever text you copied last
-- Open History: See all your previous conversions
-- Clear History: Delete your conversion history
-- Export Text: Save your converted text to a file
+### كيف أغلق البرنامج تمامًا؟
 
-## Technical Questions
+* زر أيمن على أيقونة البرنامج في شريط النظام → **Quit**.
 
-### Do I need to install anything?
-You need Python installed on your computer. If you don't have it, download it from python.org
+### ماذا يعني "التصغير إلى شريط النظام"؟
 
-### Where are my settings saved?
-In a file called `.keyboard_flipper_config.json` in your user home folder. You don't need to worry about this file unless you want to manually change settings.
+يعني أن البرنامج يختفي إلى أيقونة صغيرة بجانب الساعة بدل أن يُغلق كليًا، ليبقى جاهزًا للتحويل.
 
-### Can I use this with other languages?
-Currently, it only works with English and Arabic. Support for other languages might be added in future versions.
+### كيف أعيد النافذة الرئيسية؟
 
-### How do I update the program?
-Download the newest version and replace your current files. Your settings will be preserved.
+* انقر الأيقونة في شريط النظام.
+* أو زر أيمن → **Show**.
 
-## Still Need Help?
+---
 
-If your question isn't answered here:
-1. Read the USER_FRIENDLY_GUIDE.md file
-2. Check the detailed USER_GUIDE.md file
-3. Look at the README.md file for technical information
-4. Contact support or open an issue on GitHub
+## مشاكل وحلول
+
+### لماذا يضيف البرنامج حروفًا إضافية عند استخدام الاختصار؟
+
+كانت مشكلة قديمة وتم إصلاحها في الإصدارات الحديثة. تأكد أنك تستخدم أحدث نسخة.
+
+### نافذة البرنامج صغيرة جدًا/كبيرة جدًا
+
+يمكنك تغيير حجمها بسحب الحواف. البرنامج يتذكر الحجم المفضل لديك.
+
+### لا أجد البرنامج بعد تصغيره
+
+ابحث عن أيقونته في شريط النظام (بجانب الساعة). الأيقونة تظهر كـ "KB" داخل مربع أزرق.
+
+### البرنامج يتعطل عند التشغيل
+
+* تأكد أن Python مثبت على جهازك.
+* جرّب إعادة تثبيت البرنامج.
+* تحقق أن مضاد الفيروسات لا يحجبه.
+
+### مضاد الفيروسات يقول إن البرنامج خطير
+
+إنها نتيجة خاطئة (False Positive). البرنامج آمن، لكن بعض برامج الحماية تعتبره مريبًا لأنه يحاكي ضغطات لوحة المفاتيح. يمكنك إضافته إلى قائمة الاستثناءات.
+
+---
+
+## الميزات والتخصيص
+
+### ما الفرق بين الكشف التلقائي والاختيار اليدوي للغة؟
+
+* **الكشف التلقائي**: البرنامج يحدد إذا كان النص بالعربية أو الإنجليزية.
+* **اليدوي**: تحدد بنفسك اللغة للتحويل منها وإليها.
+
+### كيف أصدّر النص المحوّل؟
+
+1. بعد التحويل، اضغط "Export Text".
+2. اختر مكان حفظ الملف.
+3. سيتم حفظه كملف نصي (.txt).
+
+### هل يمكنني استيراد نص للتحويل؟
+
+نعم:
+
+1. اضغط "Import Text".
+2. اختر ملف .txt.
+3. سيظهر النص في مربع الإدخال للتحويل.
+
+### ما وظيفة أزرار الإجراءات السريعة؟
+
+* Convert Clipboard → تحويل النص في الحافظة.
+* Open History → عرض السجل.
+* Clear History → مسح السجل.
+* Export Text → حفظ النص في ملف.
+
+---
+
+## أسئلة تقنية
+
+### هل أحتاج لتثبيت أي شيء؟
+
+تحتاج Python على جهازك. إذا لم يكن مثبتًا، نزّله من python.org.
+
+### أين تُحفظ الإعدادات؟
+
+في ملف اسمه `.keyboard_flipper_config.json` في مجلد المستخدم الخاص بك.
+
+### هل يمكن استخدام البرنامج مع لغات أخرى؟
+
+حاليًا يدعم الإنجليزية والعربية فقط. قد تضاف لغات أخرى لاحقًا.
+
+### كيف أحدّث البرنامج؟
+
+قم بتنزيل أحدث إصدار واستبدل الملفات. إعداداتك ستبقى كما هي.
+
+---
+
+## ما زلت بحاجة لمساعدة؟
+
+* اقرأ ملف USER_FRIENDLY_GUIDE.md
+* تحقق من README.md للمعلومات التقنية
+* تواصل مع الدعم أو افتح مشكلة جديدة على GitHub
